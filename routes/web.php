@@ -54,6 +54,8 @@ Route::middleware(['auth','admin'])->prefix('admin')->group(function () {
      Route::put('/products/update/{id}',[ProductController::class,'update'])->name('admin.products.update');
      Route::delete('/products/image/{id}',[ProductController::class,'deleteImage'])->name('admin.products.image.delete');
      Route::delete('/products/destory/{id}',[ProductController::class,'destory'])->name('admin.products.destory');
+     Route::put('/products/{id}/toggle-published',[ProductController::class,'togglePublished'])->name('admin.products.toggle-published');
+     Route::put('/products/{id}/toggle-stock',[ProductController::class,'toggleStock'])->name('admin.products.toggle-stock');
     
     // Orders routes
     Route::get('/orders', [OrderController::class, 'index'])->name('admin.orders.index');
