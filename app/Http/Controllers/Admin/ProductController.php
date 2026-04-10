@@ -89,5 +89,27 @@ class ProductController extends Controller
         return redirect()->route('admin.products.index')->with('success', 'Product deleted successfully.');
     }
 
+    public function togglePublished($id)
+    {
+        $product = Product::findOrFail($id);
+        $product->published = !$product->published;
+        $product->save();
+        return response()->json([
+            'success' => 'Product published status updated successfully.',
+            'product' => $product
+        ]);
+    }
+
+    public function toggleStock($id)
+    {
+        $product = Product::findOrFail($id);
+        $product->inStock = !$product->inStock;
+        $product->save();
+        return response()->json([
+            'success' => 'Product stock status updated successfully.',
+            'product' => $product
+        ]);
+    }
+
 }
 

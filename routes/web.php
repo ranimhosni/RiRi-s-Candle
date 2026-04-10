@@ -13,12 +13,9 @@ use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\User\CheckoutController;
 
 Route::get('/', [UserController::class,'index'])->name('home');
-
-
-Route::get('/dashboard', function () {
-    return Inertia::render('Admin/Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
+Route::get('/about', function () {
+    return Inertia::render('About'); // refers to About.vue
+})->name('about');
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -36,6 +33,12 @@ Route::prefix('cart')->controller(CartController::class)->group(function () {
     Route::post('store/{product}','store')->name('cart.store');
     Route::patch('update/{product}','update')->name('cart.update');
     Route::delete('delete/{product}','delete')->name('cart.delete');
+});
+
+Route::middleware('auth')->prefix('orders')->controller(UserController::class)->group(function () {
+    Route::get('/', 'orders')->name('orders.index');
+    Route::get('{orderId}', 'orderDetail')->name('orders.detail');
+    Route::post('create/{productId}', 'orderNow')->name('orders.create');
 });
 
 
@@ -62,6 +65,8 @@ Route::middleware(['auth','admin'])->prefix('admin')->group(function () {
     Route::get('/orders/{id}', [OrderController::class, 'show'])->name('admin.orders.show');
     Route::patch('/orders/{id}/status', [OrderController::class, 'updateStatus'])->name('admin.orders.updateStatus');
     Route::delete('/orders/{id}', [OrderController::class, 'destroy'])->name('admin.orders.destroy');
+    
 
 });
+
 require __DIR__.'/auth.php';

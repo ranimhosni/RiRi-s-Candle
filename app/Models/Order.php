@@ -26,6 +26,11 @@ class Order extends Model
         return $this->belongsTo(UserAddress::class, 'user_address_id');
     }
 
+    public function userAddress()
+    {
+        return $this->belongsTo(UserAddress::class, 'user_address_id');
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class, 'created_by');
@@ -34,15 +39,5 @@ class Order extends Model
     public function creator()
     {
         return $this->belongsTo(User::class, 'created_by');
-    }
-
-    public function userAddress()
-    {
-        return $this->belongsTo(UserAddress::class, 'user_address_id');
-    }
-
-    public function getOrderNumberAttribute()
-    {
-        return '#' . str_pad($this->id, 6, '0', STR_PAD_LEFT);
     }
 }

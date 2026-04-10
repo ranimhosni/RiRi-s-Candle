@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Inertia\Middleware;
 use App\Helper\Cart;
 use App\Http\Resources\CartResource;
+use App\Models\Order;
 use Illuminate\Foundation\Application;
 
 
@@ -33,7 +34,7 @@ class HandleInertiaRequests extends Middleware
      */
     public function share(Request $request): array
     {
-        return [
+        $props = [
             ...parent::share($request),
             'auth' => [
                 'user' => $request->user(),
@@ -50,7 +51,13 @@ class HandleInertiaRequests extends Middleware
             'canRegister' => app('router')->has('register'),
             'laravelVersion' => Application::VERSION,
             'phpVersion' => PHP_VERSION,
-
         ];
+
+        // Add unviewed orders count for admin pages
+        if ($request->user() && $request->user()->isAdmin) {
+            $props['ordersCount'] = Order::where('is_viewed', false)->count();
+        }
+
+        return $props;
     }
 }

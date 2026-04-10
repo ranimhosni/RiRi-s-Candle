@@ -100,6 +100,7 @@ class OrderController extends Controller
     public function destroy($id)
     {
         $order = Order::findOrFail($id);
+        $order->items()->delete();
         $order->delete();
 
         return back()->with('success', 'Order deleted successfully!');

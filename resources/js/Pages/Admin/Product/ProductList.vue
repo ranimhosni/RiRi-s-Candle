@@ -199,6 +199,46 @@ const deleteProduct = (product, index) => {
         }
     });
 };
+
+const togglePublished = async (product) => {
+    try {
+        await router.put(route('admin.products.toggle-published', product.id), {}, {
+            onSuccess: () => {
+                product.published = !product.published;
+                Swal.fire({
+                    toast: true,
+                    icon: 'success',
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    title: 'Product published status updated successfully!'
+                });
+            }
+        });
+    } catch (err) {
+        console.log(err);
+    }
+};
+
+const toggleStock = async (product) => {
+    try {
+        await router.put(route('admin.products.toggle-stock', product.id), {}, {
+            onSuccess: () => {
+                product.inStock = !product.inStock;
+                Swal.fire({
+                    toast: true,
+                    icon: 'success',
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    title: 'Product stock status updated successfully!'
+                });
+            }
+        });
+    } catch (err) {
+        console.log(err);
+    }
+};
 </script>
 
 <template>
@@ -425,8 +465,7 @@ const deleteProduct = (product, index) => {
                                 <th scope="col" class="px-6 py-4 font-bold">Brand</th>
                                 <th scope="col" class="px-6 py-4 font-bold text-center">Quantity</th>
                                 <th scope="col" class="px-6 py-4 font-bold text-right">Price</th>
-                                <th scope="col" class="px-6 py-4 font-bold text-center">Stock</th>
-                                <th scope="col" class="px-6 py-4 font-bold text-center">Status</th>
+                                
                                 <th scope="col" class="px-6 py-4 font-bold text-center">Actions</th>
                             </tr>
                         </thead>
@@ -477,48 +516,9 @@ const deleteProduct = (product, index) => {
                                     </span>
                                 </td>
 
-                                <td class="px-6 py-4 text-center">
-                                    <span v-if="product.inStock == 0"
-                                        class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400">
-                                        <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                                            <path fill-rule="evenodd"
-                                                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                                                clip-rule="evenodd" />
-                                        </svg>
-                                        In Stock
-                                    </span>
-                                    <span v-else
-                                        class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400">
-                                        <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                                            <path fill-rule="evenodd"
-                                                d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
-                                                clip-rule="evenodd" />
-                                        </svg>
-                                        Out of Stock
-                                    </span>
-                                </td>
+                               
 
-                                <td class="px-6 py-4 text-center">
-                                    <button v-if="product.published == 0" type="button"
-                                        class="inline-flex items-center px-3 py-1.5 text-xs font-semibold text-white bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 rounded-lg shadow-sm hover:shadow-md transition-all duration-200">
-                                        <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                                            <path fill-rule="evenodd"
-                                                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                                                clip-rule="evenodd" />
-                                        </svg>
-                                        Published
-                                    </button>
-                                    <button v-else type="button"
-                                        class="inline-flex items-center px-3 py-1.5 text-xs font-semibold text-white bg-gradient-to-r from-red-500 to-pink-500 hover:from-red-600 hover:to-pink-600 rounded-lg shadow-sm hover:shadow-md transition-all duration-200">
-                                        <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                                            <path fill-rule="evenodd"
-                                                d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
-                                                clip-rule="evenodd" />
-                                        </svg>
-                                        Unpublished
-                                    </button>
-                                </td>
-
+                               
                                 <td class="px-6 py-4 text-center">
                                     <div class="flex items-center justify-center space-x-2">
                                         <button @click="openEditModal(product)"

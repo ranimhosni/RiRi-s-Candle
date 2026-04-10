@@ -9,6 +9,9 @@ defineProps({
     products: Array
 })
 
+
+
+
 const addToCart = (product) => {
     console.log(product)
     router.post(route('cart.store', product), {
@@ -30,6 +33,7 @@ const addToCart = (product) => {
     })
 }
 
+
 </script>
 
 <template>
@@ -37,16 +41,16 @@ const addToCart = (product) => {
         <Hero></Hero>
         
         <!-- Products Section -->
-        <section class="bg-gradient-to-b from-white via-amber-50/30 to-orange-50/30 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 py-12 px-4 sm:px-6 lg:px-8">
+        <section id="index" class="bg-gradient-to-b from-white via-amber-50/30 to-orange-50/30 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 py-12 px-4 sm:px-6 lg:px-8">
             <div class="max-w-7xl mx-auto">
                 
                 <!-- Section Header -->
                 <div class="text-center mb-12">
                     <h2 class="text-3xl md:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-amber-700 to-orange-600 dark:from-amber-400 dark:to-orange-300 mb-3">
-                        Our Premium Collection
+                        Our  Collection
                     </h2>
                     <p class="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-                        Discover handcrafted candles made with love, natural ingredients, and sustainable materials
+                        Candles made with love, natural ingredients, and sustainable materials
                     </p>
                     
                     <!-- Decorative divider -->
@@ -97,18 +101,8 @@ const addToCart = (product) => {
                                     </svg>
                                 </button>
 
-                                <!-- Quick View Button -->
-                                  <a
-                                    class="bg-white dark:bg-gray-800 text-amber-600 dark:text-amber-400 p-3 rounded-full shadow-lg transform hover:scale-110 transition-all duration-300 hover:-rotate-12"
-                                    title="Quick View">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                        stroke-width="2" stroke="currentColor" class="w-5 h-5">
-                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                            d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
-                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                            d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                    </svg>
-                                </a>
+
+                                
 
                                 
                             </div>
@@ -145,17 +139,7 @@ const addToCart = (product) => {
                                 {{ product.description }}
                             </p>
 
-                            <!-- Rating (if available) -->
-                            <div class="flex items-center mb-3">
-                                <div class="flex text-amber-500">
-                                    <svg v-for="i in 5" :key="i" class="w-4 h-4" :class="i <= (product.rating || 5) ? 'fill-current' : 'fill-gray-300'" viewBox="0 0 20 20">
-                                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
-                                    </svg>
-                                </div>
-                                <span class="text-xs text-gray-600 dark:text-gray-400 ml-2">
-                                    ({{ product.reviews_count || 0 }} reviews)
-                                </span>
-                            </div>
+                          
 
                             <!-- Price and Stock -->
                             <div class="flex items-center justify-between">
@@ -168,29 +152,24 @@ const addToCart = (product) => {
                                     </span>
                                 </div>
                                 
-                                <!-- Stock Indicator -->
-                                <div class="flex items-center">
-                                    <div class="w-2 h-2 rounded-full mr-1.5" 
-                                        :class="product.in_stock ? 'bg-green-500' : 'bg-red-500'">
-                                    </div>
-                                    <span class="text-xs font-medium" 
-                                        :class="product.in_stock ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'">
-                                        {{ product.in_stock ? 'In Stock' : 'Out of Stock' }}
-                                    </span>
-                                </div>
+                                
                             </div>
+                         
 
                             <!-- Quick Add to Cart (Mobile) -->
-                            <button 
-                                @click="addToCart(product)"
-                                class="w-full mt-4 md:hidden bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-700 hover:to-orange-700 text-white font-semibold py-2.5 px-4 rounded-lg transition-all duration-300 shadow-md hover:shadow-lg flex items-center justify-center space-x-2">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                    stroke-width="2" stroke="currentColor" class="w-5 h-5">
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
-                                </svg>
-                                <span>Add to Cart</span>
-                            </button>
+                            <div class="mt-4 md:hidden flex gap-2">
+                                <button 
+                                    @click="addToCart(product)"
+                                    class="flex-1 bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-700 hover:to-orange-700 text-white font-semibold py-2.5 px-4 rounded-lg transition-all duration-300 shadow-md hover:shadow-lg flex items-center justify-center space-x-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        stroke-width="2" stroke="currentColor" class="w-5 h-5">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
+                                    </svg>
+                                    <span>Add to Cart</span>
+                                </button>
+                               
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -215,4 +194,5 @@ const addToCart = (product) => {
     -webkit-box-orient: vertical;
     overflow: hidden;
 }
+
 </style>

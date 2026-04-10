@@ -1,9 +1,14 @@
 <script setup>
-import { Link } from '@inertiajs/vue3';
-import { ref } from 'vue';
+import { Link, usePage } from '@inertiajs/vue3';
+import { ref, computed } from 'vue';
 
+const page = usePage();
 const isPagesOpen = ref(false);
 const isProductsOpen = ref(false);
+
+const ordersCount = computed(() => {
+    return page.props.ordersCount || 0;
+});
 
 const togglePages = () => {
     isPagesOpen.value = !isPagesOpen.value;
@@ -64,7 +69,7 @@ const toggleProducts = () => {
                         </div>
                         <span class="ml-3 font-semibold">Orders</span>
                         <span class="inline-flex items-center justify-center ml-auto px-2 py-1 text-xs font-bold text-white bg-gradient-to-r from-red-500 to-pink-500 rounded-full">
-                            3
+                            {{ ordersCount }}
                         </span>
                     </Link>
                 </li>

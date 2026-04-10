@@ -1,4 +1,4 @@
-<script setup>
+make a pop up after hekout to onfirm "<script setup>
 import { computed, reactive } from 'vue'
 
 import UserLayouts from './Layouts/UserLayouts.vue';
@@ -132,11 +132,11 @@ function submit() {
                                     </div>
                                 </td>
                                 <td class="px-6 py-4 font-semibold text-gray-900 dark:text-white">
-                                    ${{ product.price }}
+                                    {{ product.price }} DT
                                 </td>
                                 <td class="px-6 py-4">
-                                    <a @click="remove(product)"
-                                        class="font-medium text-red-600 dark:text-red-500 hover:underline">Remove</a>
+                                    <button @click="remove(product)"
+                                        class="font-medium text-red-600 dark:text-red-500 hover:underline">Remove</button>
                                 </td>
                             </tr>
                         </tbody>
@@ -146,7 +146,9 @@ function submit() {
                 </div>
                 <div class="lg:w-1/3 md:w-1/2 bg-white flex flex-col md:ml-auto w-full md:py-8 mt-8 md:mt-0">
                     <h2 class="text-gray-900 text-lg mb-1 font-medium title-font">Summary</h2>
-                    <p class="leading-relaxed mb-5 text-gray-600">Total : $ {{ total }} </p>
+                    <p>Your candles :  {{ total}} DT</p>
+                    <p>Shipping: 8 DT</p>
+                    <p class="text-lg mb-1 font-medium title-font text-red-600">Total :  {{ total + 8 }} DT</p>
 
                     <div v-if="userAddress">
                         <h2 class="text-gray-900 text-lg mb-1 font-medium title-font">Shipping Address</h2>
@@ -205,4 +207,4 @@ function submit() {
                 </div>
             </div>
         </section>
-    </UserLayouts></template>
+    </UserLayouts></template>"
