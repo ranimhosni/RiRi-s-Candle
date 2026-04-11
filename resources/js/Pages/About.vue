@@ -17,37 +17,49 @@ const toggleFullStory = () => {
         <section class="py-12 bg-white">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="lg:text-center">
-                    <h2 class="text-base text-black font-semibold tracking-wide uppercase">Meet the Founder</h2>
-                    <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+                    <h2 class="text-base text-orange-500 font-semibold tracking-wide uppercase">Meet the Founder</h2>
+                    <p class="mt-1 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
                         The Heart Behind Our Candles
                     </p>
                 </div>
 
-                <div class="mt-10">
+                <div >
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
                         <div class="order-2 md:order-1">
                             <h3 class="text-2xl font-bold text-gray-900">Ranim Hosni</h3>
-                            <p class="mt-4 text-lg text-gray-600">
-                                With a background in aromatherapy and a love for interior design, Sarah created her first candle during a difficult time in her life when she was searching for comfort and a creative outlet.
-                            </p>
-                            <p class="mt-4 text-lg text-gray-600">
-                                "I believe that a beautiful candle can transform any space and moment. Each scent tells a story and can transport you to a different time and place. That's the magic I want to share with every customer."
-                            </p>
+                            <p class="mt-2 text-lg text-gray-600">
+Riri's Candles was born from a simple moment… and a powerful feeling.
+
+In her early twenties, Ranim discovered the quiet magic of a candle—the way its soft glow could transform a space, calm the mind, and bring a sense of warmth and comfort. What started as a small curiosity quickly turned into a passion: creating candles that do more than just light a room… candles that create emotions.                            </p>
+                            <p class="mt-2 text-lg text-gray-600">
+With no big resources, no perfect plan—only determination—Ranim began her journey. She spent countless hours learning, testing, and perfecting every detail. From choosing the right wax to blending delicate fragrances, every step was guided by care and intention                            </p>
                             
-                            <div v-if="!showFullStory" class="mt-6">
-                                <button @click="toggleFullStory" class="text-purple-600 hover:text-purple-800 underline">
+                            <div v-if="!showFullStory" class="mt-4">
+                                <button @click="toggleFullStory" class="text-orange-600 hover:text-purple-800 underline">
                                     Read more about Ranim's journey
                                 </button>
                             </div>
                             
                             <div v-if="showFullStory" class="mt-4 text-lg text-gray-600">
                                 <p>
-                                    After leaving her corporate job in 2017, Sarah dedicated herself fully to perfecting her craft. She trained with master chandlers in France and studied organic chemistry to understand the science behind fragrance creation.
-                                </p>
+The first creations weren’t perfect—but they were made with heart.
+
+And that made all the difference.
+
+Each candle became a reflection of her story: patience, growth, and the courage to keep going even when things felt uncertain. Slowly, what started as a small idea turned into something meaningful—a brand built on authenticity, passion, and love for the craft.                                </p>
                                 <p class="mt-4">
-                                    Today, she leads a team of passionate artisans who share her vision of bringing affordable luxury into everyday homes.
-                                </p>
-                                <button @click="toggleFullStory" class="mt-4 text-purple-600 hover:text-purple-800 underline">
+Today, Riri's Candles is more than a business.
+
+It’s about creating moments.
+
+Moments of peace after a long day.
+Moments of warmth shared with loved ones.
+Moments where you can pause, breathe, and feel at home.
+
+Every candle is carefully handcrafted to bring light—not only into your space, but into your life.
+
+Because sometimes, the smallest flame can make the biggest difference                                </p>
+                                <button @click="toggleFullStory" class="mt-4 text-orange-600 hover:text-purple-800 underline">
                                     Show less
                                 </button>
                             </div>
@@ -76,10 +88,10 @@ const toggleFullStory = () => {
                         </div>
                         <div>
                             <p class="text-lg text-gray-600">
-                                Our journey began in a small kitchen in 2018, with nothing but a passion for creating handcrafted candles. What started as a hobby quickly blossomed into something more meaningful as friends and family fell in love with our unique scents and designs.
+                                Our journey began in a small kitchen in 2025, with nothing but a passion for creating handcrafted candles. What started as a hobby quickly blossomed into something more meaningful as friends and family fell in love with our unique scents and designs.
                             </p>
                             <p class="mt-4 text-lg text-gray-600">
-                                Each candle is carefully crafted using premium soy wax, lead-free cotton wicks, and the finest fragrance oils. We believe that every candle should not only smell wonderful but also be safe for your home and family.
+                                Each candle is carefully crafted using  soy wax, lead-free cotton wicks, and the finest fragrance oils. We believe that every candle should not only smell wonderful but also be safe for your home and family.
                             </p>
                         </div>
                     </div>
@@ -100,7 +112,7 @@ const toggleFullStory = () => {
                 <div class="mt-10">
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                         <div class="bg-white p-6 rounded-lg shadow-md">
-                            <div class="w-12 h-12 inline-flex items-center justify-center rounded-full bg-purple-100 text-purple-500 mb-4">
+                            <div class="w-12 h-12 inline-flex items-center justify-center rounded-full bg-orange-100 text-orange-500 mb-4">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
                                 </svg>
@@ -112,7 +124,7 @@ const toggleFullStory = () => {
                         </div>
 
                         <div class="bg-white p-6 rounded-lg shadow-md">
-                            <div class="w-12 h-12 inline-flex items-center justify-center rounded-full bg-purple-100 text-purple-500 mb-4">
+                            <div class="w-12 h-12 inline-flex items-center justify-center rounded-full bg-orange-100 text-orange-500 mb-4">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h.5A2.5 2.5 0 0020 5.5v-1.65" />
                                 </svg>
@@ -124,7 +136,7 @@ const toggleFullStory = () => {
                         </div>
 
                         <div class="bg-white p-6 rounded-lg shadow-md">
-                            <div class="w-12 h-12 inline-flex items-center justify-center rounded-full bg-purple-100 text-purple-500 mb-4">
+                            <div class="w-12 h-12 inline-flex items-center justify-center rounded-full bg-orange-100 text-orange-500 mb-4">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                                 </svg>
@@ -296,29 +308,7 @@ const toggleFullStory = () => {
             </div>
         </section>
 
-        <!-- Call to Action -->
-        <section class="py-12 bg-purple-600">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
-                    Join Our Candle Community
-                </h2>
-                <p class="mt-4 text-lg leading-6 text-purple-100">
-                    Subscribe to our newsletter for new scent announcements, special offers, and candle care tips.
-                </p>
-                <div class="mt-8 flex justify-center">
-                    <div class="inline-flex rounded-md shadow">
-                        <a href="#" class="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-purple-600 bg-white hover:bg-purple-50">
-                            Shop Our Collection
-                        </a>
-                    </div>
-                    <div class="ml-3 inline-flex">
-                        <a href="#" class="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-purple-800 hover:bg-purple-900">
-                            Subscribe
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </section>
+      
     </UserLayouts>
 </template>
 <style>

@@ -145,7 +145,7 @@ const addToCart = (product) => {
                             <div class="flex items-center justify-between">
                                 <div>
                                     <span class="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-amber-700 to-orange-600 dark:from-amber-400 dark:to-orange-300">
-                                        {{ product.price }}DT
+                                        {{ Number(product.price) }}DT
                                     </span>
                                     <span v-if="product.old_price" class="text-sm text-gray-500 line-through ml-2">
                                         {{ product.old_price }}DT

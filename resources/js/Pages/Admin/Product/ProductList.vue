@@ -512,7 +512,7 @@ const toggleStock = async (product) => {
 
                                 <td class="px-6 py-4 text-right">
                                     <span class="text-lg font-bold text-transparent bg-clip-text bg-gradient-to-r from-amber-700 to-orange-600 dark:from-amber-400 dark:to-orange-300">
-                                        {{ product.price }} DT
+                                        {{Number(product.price) }} DT
                                     </span>
                                 </td>
 
