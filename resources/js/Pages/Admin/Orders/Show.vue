@@ -127,7 +127,7 @@ const handleImageError = (event) => {
                                 Total Amount
                             </label>
                             <p class="text-lg font-bold text-transparent bg-clip-text bg-gradient-to-r from-amber-700 to-orange-600 dark:from-amber-400 dark:to-orange-300">
-                                {{ (Number(order?.total_price) || 0).toFixed(2) }} DT
+                                {{ (Number(order?.total_price) || 0) }} DT
                             </p>
                         </div>
                     </div>
@@ -162,34 +162,34 @@ const handleImageError = (event) => {
                         <!-- Address 1 -->
                         <div>
                             <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                                Address
+                                Name
                             </label>
-                            <p class="text-gray-900 dark:text-white">{{ order?.userAddress?.adresse1 || 'N/A' }}</p>
+                            <p class="text-gray-900 dark:text-white">{{ order?.user_address?.name || 'N/A' }}</p>
                         </div>
-
+                          <div>
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                                Last Name
+                            </label>
+                            <p class="text-gray-900 dark:text-white">{{ order?.user_address?.last_name || 'N/A' }}</p>
+                        </div>
                         <!-- City -->
                         <div>
                             <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                                City
+                                Address
                             </label>
-                            <p class="text-gray-900 dark:text-white">{{ order?.userAddress?.city || 'N/A' }}</p>
+                            <p class="text-gray-900 dark:text-white">{{ order?.user_address?.address || 'N/A' }}</p>
                         </div>
 
                         <!-- State -->
                         <div>
                             <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                                State
+                                Phone
                             </label>
-                            <p class="text-gray-900 dark:text-white">{{ order?.userAddress?.state || 'N/A' }}</p>
+                            <p class="text-gray-900 dark:text-white">{{ order?.user_address?.phone || 'N/A' }}</p>
                         </div>
 
                         <!-- Country Code -->
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                                Country
-                            </label>
-                            <p class="text-gray-900 dark:text-white">{{ order?.userAddress?.country_code || 'N/A' }}</p>
-                        </div>
+                       
                     </div>
                 </div>
 
@@ -275,17 +275,17 @@ const handleImageError = (event) => {
                                 <div class="flex justify-between mb-3">
                                     <span class="text-gray-700 dark:text-gray-300">Subtotal:</span>
                                     <span class="text-gray-900 dark:text-white font-semibold">
-                                        {{ (Number(order?.total_price) * 0.95 || 0).toFixed(2) }} DT
+                                        {{ (Number(order?.total_price)  || 0) }} DT
                                     </span>
                                 </div>
                                 <div class="flex justify-between mb-3 pb-3 border-b border-gray-200 dark:border-gray-600">
                                     <span class="text-gray-700 dark:text-gray-300">Shipping:</span>
-                                    <span class="text-gray-900 dark:text-white font-semibold">Free</span>
+                                    <span class="text-gray-900 dark:text-white font-semibold">8 DT</span>
                                 </div>
                                 <div class="flex justify-between">
                                     <span class="text-lg font-bold text-gray-900 dark:text-white">Total:</span>
                                     <span class="text-lg font-bold text-transparent bg-clip-text bg-gradient-to-r from-amber-700 to-orange-600 dark:from-amber-400 dark:to-orange-300">
-                                        {{ (Number(order?.total_price) || 0).toFixed(2) }} DT
+                                        {{ (Number(order?.total_price) || 0) + 8 }} DT
                                     </span>
                                 </div>
                             </div>

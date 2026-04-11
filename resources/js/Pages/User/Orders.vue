@@ -148,9 +148,9 @@ const formatDate = (date) => {
                         <div v-if="order.user_address" class="p-6 border-b border-gray-200 dark:border-gray-700">
                             <h3 class="text-sm font-semibold text-gray-900 dark:text-white mb-3">Shipping Address</h3>
                             <div class="text-sm text-gray-600 dark:text-gray-400">
-                                <p>{{ order.user_address.adresse1 }}</p>
-                                <p v-if="order.user_address.adresse2">{{ order.user_address.adresse2 }}</p>
-                                <p>{{ order.user_address.city }}, {{ order.user_address.state }} {{ order.user_address.country_code }}</p>
+                                <p>{{ order.user_address.name }}</p>
+                                <p v-if="order.user_address.last_name">{{ order.user_addresslast_name }}</p>
+                                <p>{{ order.user_address.address}}, {{ order.user_address.phone }} </p>
                             </div>
                         </div>
 

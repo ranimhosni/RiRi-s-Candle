@@ -77,7 +77,7 @@ class OrderController extends Controller
 
         // Add order_number
         $order->order_number = $order->orderNumber;
-
+        
         return Inertia::render('Admin/Orders/Show', [
             'order' => $order
         ]);

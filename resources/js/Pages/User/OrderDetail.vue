@@ -168,10 +168,10 @@ const formatDate = (date) => {
                         </div>
                         <div class="p-6">
                             <div class="text-gray-700 dark:text-gray-300 space-y-2">
-                                <p class="font-semibold">{{ order.user_address.adresse1 }}</p>
-                                <p v-if="order.user_address.adresse2">{{ order.user_address.adresse2 }}</p>
-                                <p>{{ order.user_address.city }}, {{ order.user_address.state }}</p>
-                                <p class="font-medium">{{ order.user_address.country_code }}</p>
+                                <p class="font-semibold">{{ order.user_address.name }}</p>
+                                <p v-if="order.user_address.last_name">{{ order.user_address.last_name }}</p>
+                                <p>{{ order.user_address.address }}, {{ order.user_address.phone }}</p>
+                                
                             </div>
                         </div>
                     </div>

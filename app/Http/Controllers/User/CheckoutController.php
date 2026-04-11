@@ -35,16 +35,16 @@ class CheckoutController extends Controller
         $newAddress = $request->address;
         
         // Save or update user address
-        if ($newAddress['adresse1'] ?? null) {
+        if ($newAddress['name'] ?? null) {
             // Unset previously main addresses
             UserAddress::where(['user_id' => $user->id, 'isMain' => 1])->update(['isMain' => 0]);
             
             // Create new address
             $address = new UserAddress();
-            $address->adresse1 = $newAddress['adresse1'];
-            $address->state = $newAddress['state'] ?? null;
-            $address->city = $newAddress['city'] ?? null;
-            $address->country_code = $newAddress['country_code'] ?? null;
+            $address->name = $newAddress['name'];
+            $address->last_name = $newAddress['last_name'] ?? null;
+            $address->address = $newAddress['address'] ?? null;
+            $address->phone = $newAddress['phone'] ?? null;
             $address->type = $newAddress['type'] ?? 'shipping';
             $address->user_id = $user->id;
             $address->isMain = 1;

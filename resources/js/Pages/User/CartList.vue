@@ -1,4 +1,4 @@
-make a pop up after hekout to onfirm "<script setup>
+<script setup>
 import { computed, reactive } from 'vue'
 
 import UserLayouts from './Layouts/UserLayouts.vue';
@@ -15,18 +15,18 @@ const total = computed(() => usePage().props.cart.data.total)
 const itemId = (id) => carts.value.findIndex((item) => item.product_id === id);
 
 const form = reactive({
-    adresse1: null,
-    state: null,
-    city: null,
-    country_code: null,
+    name: null,
+    last_name: null,
+    address: null,
+    phone: null,
     type: null,
 
 })
 const formFilled = computed(()=>{
-   return (form.adresse1 !== null &&
-    form.state !== null &&
-    form.city !== null &&
-    form.country_code !== null &&
+   return (form.name !== null &&
+    form.last_name !== null &&
+    form.address !== null &&
+    form.phone !== null &&
     form.type !== null )
 })
 
@@ -152,8 +152,8 @@ function submit() {
 
                     <div v-if="userAddress">
                         <h2 class="text-gray-900 text-lg mb-1 font-medium title-font">Shipping Address</h2>
-                        <p class="leading-relaxed mb-5 text-gray-600">{{ userAddress.adresse1 }} , {{ userAddress.city }}, {{
-                            userAddress.country_code}}</p>
+                        <p class="leading-relaxed mb-5 text-gray-600">{{ userAddress.name }} , {{ userAddress.last_name }}, {{
+                            userAddress.phone}} , {{ userAddress.address }} </p>
                         <p class="leading-relaxed mb-5 text-gray-600">or you can add new below</p>
 
                     </div>
@@ -165,43 +165,66 @@ function submit() {
 
 
                     <form @submit.prevent="submit">
-                        <div class="relative mb-4">
-                            <label for="name" class="leading-7 text-sm text-gray-600">Address 1</label>
-                            <input type="text" id="name" name="address1" v-model="form.adresse1"
-                                class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
-                        </div>
-                        <div class="relative mb-4">
-                            <label for="email" class="leading-7 text-sm text-gray-600">City</label>
-                            <input type="text" id="email" name="city" v-model="form.city"
-                                class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
-                        </div>
-                        <div class="relative mb-4">
-                            <label for="email" class="leading-7 text-sm text-gray-600">State</label>
-                            <input type="text" id="email" name="state" v-model="form.state"
-                                class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
-                        </div>
-                    
-                        <div class="relative mb-4">
-                            <label for="email" class="leading-7 text-sm text-gray-600">Country Code</label>
-                            <input type="text" id="email" name="countrycode" v-model="form.country_code"
-                                class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
-                        </div>
-                        <div class="relative mb-4">
-                            <label for="email" class="leading-7 text-sm text-gray-600">Address type</label>
-                            <input type="text" id="email" name="type" v-model="form.type"
-                                class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
-                        </div>
+  <div class="relative mb-4">
+    <label for="name" class="leading-7 text-sm text-gray-600">Name</label>
+    <input
+      type="text"
+      id="name"
+      name="name"
+      v-model="form.name"
+      class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+    />
+  </div>
 
+  <div class="relative mb-4">
+    <label for="last_name" class="leading-7 text-sm text-gray-600">Last Name</label>
+    <input
+      type="text"
+      id="last_name"
+      name="last_name"
+      v-model="form.last_name"
+      class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+    />
+  </div>
 
+  <div class="relative mb-4">
+    <label for="address" class="leading-7 text-sm text-gray-600">Address</label>
+    <input
+      type="text"
+      id="address"
+      name="address"
+      v-model="form.address"
+      class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+    />
+  </div>
 
-                        <button v-if="formFilled || userAddress" type="submit"
-                            class="text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg">Checkout</button>
+  <div class="relative mb-4">
+    <label for="phone" class="leading-7 text-sm text-gray-600">Phone</label>
+    <input
+      type="tel"
+      id="phone"
+      name="phone"
+      v-model="form.phone"
+      class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+    />
+  </div>
 
-                        <button v-else type="submit"
-                            class="text-white bg-gray-500 border-0 py-2 px-6 focus:outline-none hover:bg-gray-600 rounded text-lg">Add
-                            Address to continue</button>
+  <button
+    v-if="formFilled || userAddress"
+    type="submit"
+    class="text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg"
+  >
+    Checkout
+  </button>
 
-                    </form>
+  <button
+    v-else
+    type="submit"
+    class="text-white bg-gray-500 border-0 py-2 px-6 focus:outline-none hover:bg-gray-600 rounded text-lg"
+  >
+    Add Address to continue
+  </button>
+</form>
 
                     <p class="text-xs text-gray-500 mt-3">Continue Shopping </p>
                 </div>

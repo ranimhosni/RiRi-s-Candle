@@ -13,13 +13,14 @@ return new class extends Migration
     {
         Schema::create('user_addresses', function (Blueprint $table) {
             $table->id();
-            $table->string('type',45);
             $table->string('adresse1',255);
             $table->string('adresse2',255)->nullable();
             $table->string('city',255);
             $table->string('state',45)->nullable();
             $table->string('isMain')->default(1);
             $table->string('country_code',3);
+            
+           
             $table->foreignId('user_id')->references('id')->on('users');
             $table->timestamps();
         });
