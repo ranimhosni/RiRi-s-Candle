@@ -72,7 +72,7 @@ class CheckoutController extends Controller
         
         if ($cartItems->isEmpty()) {
             $order->delete();
-            return response()->json(['error' => 'Your cart is empty'], 422);
+           return redirect()->back()->with('error', 'Your cart is empty');
         }
 
         foreach ($cartItems as $cartItem) {
@@ -90,10 +90,7 @@ class CheckoutController extends Controller
         // Clear cart items from cookies
         Cart::setCookieCartItems([]);
 
-        return response()->json([
-            'success' => true,
-            'message' => 'Order created successfully',
-            'order_id' => $order->id,
-        ], 201);
+        return redirect()->route('orders.index')
+    ->with('success', 'Order created successfully!');
     }
 }

@@ -6,4 +6,5 @@
 @tailwind utilities;
 @plugin "flowbite/plugin";
 @source "../node_modules/flowbite";
+/* In your app.css or at the top of your <style> (non-scoped) */
 

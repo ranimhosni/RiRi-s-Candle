@@ -1,12 +1,15 @@
 <script setup>
-import { computed, reactive } from 'vue'
-
+import { computed, reactive, ref } from 'vue';
 import UserLayouts from './Layouts/UserLayouts.vue';
 import { router, usePage } from '@inertiajs/vue3';
 
 defineProps({
     userAddress: Object
 })
+
+// Add state for popups
+const showConfirmDialog = ref(false);
+const showSuccessDialog = ref(false);
 
 const carts = computed(() => usePage().props.cart.data.items)
 const products = computed(() => usePage().props.cart.data.products)
@@ -20,45 +23,59 @@ const form = reactive({
     address: null,
     phone: null,
     type: null,
-
 })
+
 const formFilled = computed(()=>{
    return (form.name !== null &&
     form.last_name !== null &&
     form.address !== null &&
     form.phone !== null &&
-    form.type !== null )
+    form.type !== null)
 })
-
-
 
 const update = (product, quantity) =>
     router.patch(route('cart.update', product), {
         quantity,
     });
+
 //remove form cart 
 const remove = (product) => router.delete(route('cart.delete', product));
 
-
-//confirm order 
-
-function submit() {
-    router.visit(route('checkout.store'), {
-        method: 'post',
-        data: {
-            carts: usePage().props.cart.data.items,
-            products: usePage().props.cart.data.products,
-            total: usePage().props.cart.data.total,
-            address: form
-        }
-    })
+// Show confirmation dialog
+function confirmCheckout() {
+    showConfirmDialog.value = true;
 }
 
+function submit() {
+    showConfirmDialog.value = false;
+    
+    const orderData = {
+        carts: usePage().props.cart.data.items,
+        products: usePage().props.cart.data.products,
+        total: usePage().props.cart.data.total,
+        address: form
+    };
+    
+    // Using post method directly instead of visit
+    router.post(route('checkout.store'), orderData, {
+        onSuccess: () => {
+            // Show success dialog after successful order
+            showSuccessDialog.value = true;
+        },
+        onError: (errors) => {
+            console.error("Order error:", errors);
+            // Handle errors here if needed
+        }
+    });
+}
 
-
-
-
+function closeSuccessDialog() {
+    showSuccessDialog.value = false;
+    // Optionally redirect after success
+    router.visit(route('home'));
+}
 </script>
+
 <template>
     <UserLayouts>
         <section class="text-gray-600 body-font relative">
@@ -162,72 +179,104 @@ function submit() {
                     <p class="leading-relaxed mb-5 text-gray-600"> Add shipping address to continue</p>
                   </div>
 
+                  <form @submit.prevent="confirmCheckout">
+                    <div class="relative mb-4">
+                      <label for="name" class="leading-7 text-sm text-gray-600">Name</label>
+                      <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        v-model="form.name"
+                        class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                      />
+                    </div>
 
+                    <div class="relative mb-4">
+                      <label for="last_name" class="leading-7 text-sm text-gray-600">Last Name</label>
+                      <input
+                        type="text"
+                        id="last_name"
+                        name="last_name"
+                        v-model="form.last_name"
+                        class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                      />
+                    </div>
 
-                    <form @submit.prevent="submit">
-  <div class="relative mb-4">
-    <label for="name" class="leading-7 text-sm text-gray-600">Name</label>
-    <input
-      type="text"
-      id="name"
-      name="name"
-      v-model="form.name"
-      class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-    />
-  </div>
+                    <div class="relative mb-4">
+                      <label for="address" class="leading-7 text-sm text-gray-600">Address</label>
+                      <input
+                        type="text"
+                        id="address"
+                        name="address"
+                        v-model="form.address"
+                        class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                      />
+                    </div>
 
-  <div class="relative mb-4">
-    <label for="last_name" class="leading-7 text-sm text-gray-600">Last Name</label>
-    <input
-      type="text"
-      id="last_name"
-      name="last_name"
-      v-model="form.last_name"
-      class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-    />
-  </div>
+                    <div class="relative mb-4">
+                      <label for="phone" class="leading-7 text-sm text-gray-600">Phone</label>
+                      <input
+                        type="tel"
+                        id="phone"
+                        name="phone"
+                        v-model="form.phone"
+                        class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                      />
+                    </div>
 
-  <div class="relative mb-4">
-    <label for="address" class="leading-7 text-sm text-gray-600">Address</label>
-    <input
-      type="text"
-      id="address"
-      name="address"
-      v-model="form.address"
-      class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-    />
-  </div>
+                    <button
+                      v-if="formFilled || userAddress"
+                      type="submit"
+                      class="text-white bg-orange-500 border-0 py-2 px-6 focus:outline-none hover:bg-orange-600 rounded text-lg"
+                    >
+                      Checkout
+                    </button>
 
-  <div class="relative mb-4">
-    <label for="phone" class="leading-7 text-sm text-gray-600">Phone</label>
-    <input
-      type="tel"
-      id="phone"
-      name="phone"
-      v-model="form.phone"
-      class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-    />
-  </div>
+                    <button
+                      v-else
+                      type="submit"
+                      class="text-white bg-gray-500 border-0 py-2 px-6 focus:outline-none hover:bg-gray-600 rounded text-lg"
+                    >
+                      Add Address to continue
+                    </button>
+                  </form>
 
-  <button
-    v-if="formFilled || userAddress"
-    type="submit"
-    class="text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg"
-  >
-    Checkout
-  </button>
-
-  <button
-    v-else
-    type="submit"
-    class="text-white bg-gray-500 border-0 py-2 px-6 focus:outline-none hover:bg-gray-600 rounded text-lg"
-  >
-    Add Address to continue
-  </button>
-</form>
-
-                    <p class="text-xs text-gray-500 mt-3">Continue Shopping </p>
+                  <p class="text-xs text-gray-500 mt-3">Continue Shopping </p>
                 </div>
             </div>
         </section>
-    </UserLayouts></template>"
+
+        <div v-if="showConfirmDialog" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full flex items-center justify-center z-50">
+            <div class="relative p-5 bg-white rounded-lg shadow-xl max-w-md mx-auto">
+                <h3 class="text-lg font-bold mb-4">Confirm Order</h3>
+                <p class="mb-4">Are you sure you want to place this order for {{ total + 8 }} DT?</p>
+                <div class="flex justify-end space-x-3">
+                    <button @click="showConfirmDialog = false" class="px-4 py-2 bg-gray-200 text-gray-800 rounded hover:bg-gray-300">
+                        Cancel
+                    </button>
+                    <button @click="submit" class="px-4 py-2 bg-indigo-500 text-white rounded hover:bg-indigo-600">
+                        Confirm Order
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Success Dialog -->
+        <div v-if="showSuccessDialog" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full flex items-center justify-center z-50">
+            <div class="relative p-5 bg-white rounded-lg shadow-xl max-w-md mx-auto">
+                <div class="text-center">
+                    <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-green-100 mb-4">
+                        <svg class="h-6 w-6 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-900 mb-2">Order Successful!</h3>
+                    <p class="text-gray-600 mb-4">Thank you for your order. We'll process it as soon as possible.</p>
+                    <button @click="closeSuccessDialog" class="w-full py-2 px-4 bg-indigo-500 text-white rounded hover:bg-indigo-600">
+                        Continue Shopping
+                    </button>
+                </div>
+            </div>
+        </div>
+    </UserLayouts>
+</template>

@@ -65,7 +65,7 @@ Because sometimes, the smallest flame can make the biggest difference           
                             </div>
                         </div>
                         <div class="order-1 md:order-2">
-                            <img class="mx-auto h-72 w-72 rounded-full object-cover" src="./founder.jpeg" alt="Founder portrait">
+                            <img class="mx-auto h-80 w-80 rounded-lg object-cover" src="./ranim.png" alt="Founder portrait">
                         </div>
                     </div>
                 </div>
@@ -84,7 +84,7 @@ Because sometimes, the smallest flame can make the biggest difference           
                 <div class="mt-10">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
                         <div class="aspect-w-3 aspect-h-2">
-                            <img class="w-40 h-40 object-cover shadow-lg rounded-lg" src="https://images.unsplash.com/photo-1603006905003-be475563bc59?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Candle making process">
+                            <img class="w-80 h-80 object-cover shadow-lg rounded-lg" src="./first.jpeg" alt="Candle making process">
                         </div>
                         <div>
                             <p class="text-lg text-gray-600">
