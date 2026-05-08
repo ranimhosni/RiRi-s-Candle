@@ -11,7 +11,9 @@ use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\User\CartController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\User\CheckoutController;
-
+Route::get('/dashboard', function () {
+    return redirect('/');
+})->name('dashboard');
 Route::get('/', [UserController::class,'index'])->name('home');
 Route::get('/about', function () {
     return Inertia::render('About'); // refers to About.vue
