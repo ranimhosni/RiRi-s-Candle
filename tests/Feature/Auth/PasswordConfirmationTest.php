@@ -38,7 +38,7 @@ class PasswordConfirmationTest extends TestCase
         $response = $this->actingAs($user)->post('/confirm-password', [
             'password' => 'wrong-password',
         ]);
-
+         $response->assertRedirect('/');
         $response->assertSessionHasErrors();
     }
 }
