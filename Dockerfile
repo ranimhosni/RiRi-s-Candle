@@ -1,32 +1,43 @@
-# 1. Use CLI for "artisan serve" or FPM for Nginx
-FROM php:8.2-cli
+# --- STAGE 1: Build Assets (Frontend) ---
+FROM node:18-alpine AS frontend-builder
+WORKDIR /app
+COPY package*.json ./
+RUN npm install
+COPY . .
+RUN npm run build
 
-# 2. Install system dependencies AND PHP extensions
-RUN apt-get update && apt-get install -y \
+# --- STAGE 2: The Final Production Image ---
+FROM php:8.2-cli-alpine
+
+# Install system dependencies for PHP
+RUN apk add --no-cache \
     git \
     unzip \
-    libpq-dev \
-    libonig-dev \
-    && docker-php-ext-install pdo pdo_mysql mbstring
+    libzip-dev \
+    libpng-dev \
+    oniguruma-dev
 
-# 3. Get Composer
+# Install PHP extensions
+RUN docker-php-ext-install pdo pdo_mysql mbstring zip
+
+# Get Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 WORKDIR /var/www
 
-# 4. Cache dependencies (This is the "Speed" part)
+# Copy only dependency files first (for caching)
 COPY composer.json composer.lock ./
-RUN composer install --no-scripts --no-autoloader --no-dev
+RUN composer install --no-dev --no-scripts --no-autoloader --prefer-dist
 
-# 5. Copy the rest of the RiRi's Candles source code
-
-
-# 6. Finalize Composer (Generate the autoloader)
-RUN composer dump-autoload --optimize
-
-# 7. Set permissions for Laravel
-RUN chown -R www-data:www-data storage bootstrap/cache
+# Copy the rest of the application
 COPY . .
-EXPOSE 8000
 
+# Copy the compiled assets from STAGE 1
+COPY --from=frontend-builder /app/public/build ./public/build
+
+# Finalize PHP setup
+RUN composer dump-autoload --optimize \
+    && chown -R www-data:www-data storage bootstrap/cache
+
+EXPOSE 8000
 CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=8000"]

@@ -1,5 +1,9 @@
 .git
-vendor
+.env
 node_modules
+vendor
+storage/*.log
+storage/framework/cache/data/*
+storage/framework/sessions/*
+storage/framework/views/*
 .phpunit.result.cache
-storage/*.key
